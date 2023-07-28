@@ -55,3 +55,19 @@ def create_session():
     """
     session = Session.builder.configs('your_credentials').create()
     return session
+
+@st.cache_data
+def load_data(sql_query):
+    """
+    Connects to Snowflake, creates a session, and pulls data with the given query.
+
+    Parameters:
+        sql_query (str): The SQL query to pull the data.
+
+    Returns:
+        query (object): The result of the query.
+    """
+    session = create_session()
+    # pull the data with the given query
+    query = session.sql(sql_query).collect()
+    return query
