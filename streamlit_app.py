@@ -71,3 +71,5 @@ def load_data(sql_query):
     # pull the data with the given query
     query = session.sql(sql_query).collect()
     return query
+
+# testing after checking my emails
