@@ -72,4 +72,15 @@ def load_data(sql_query):
     query = session.sql(sql_query).collect()
     return query
 
-# testing after checking my emails
+def add_header(text):
+    """
+    Adds a header with given text to the Markdown content.
+
+    Args:
+        text (str): The text for the header.
+
+    Returns:
+        None
+    """
+    new_title = f'<h style="font-family:sans-serif; color:#6495ED; font-size: 35px;">{text}</h>'
+    st.markdown(new_title, unsafe_allow_html=True)
