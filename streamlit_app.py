@@ -10,7 +10,6 @@ from snowflake.snowpark import Session
 import matplotlib.pyplot as plt
 
 
-
 def set_page_config():
     """
     Sets the page configuration
@@ -53,8 +52,13 @@ def create_session():
     Returns:
         Session: Session object.
     """
-    session = Session.builder.configs('your_credentials').create()
-    return session
+    try:
+        session = Session.builder.configs('your_credentials').create()
+        return session
+    except Exception as e:
+        print(f"Error occurred while creating session: {e}")
+        return None
+
 
 @st.cache_data
 def load_data(sql_query):
@@ -69,8 +73,14 @@ def load_data(sql_query):
     """
     session = create_session()
     # pull the data with the given query
-    query = session.sql(sql_query).collect()
-    return query
+
+    try:
+        query = session.sql(sql_query).collect()
+        return query
+    except Exception as e:
+        print(f"Error occurred while loading data: {e}")
+        return None
+
 
 def add_header(text):
     """
@@ -84,3 +94,16 @@ def add_header(text):
     """
     new_title = f'<h style="font-family:sans-serif; color:#6495ED; font-size: 35px;">{text}</h>'
     st.markdown(new_title, unsafe_allow_html=True)
+    
+    
+def main():
+    """
+    Main function to pull and display data.
+    """
+    set_page_config()
+
+    # Load and display data
+    # suppose you have the query here
+    sql_query = """SELECT COL1, COL2 FROM TABLE1; """
+    data = load_data(sql_query)
+    # TODO add filter data/display functions
