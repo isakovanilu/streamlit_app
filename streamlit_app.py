@@ -95,7 +95,24 @@ def add_header(text):
     new_title = f'<h style="font-family:sans-serif; color:#6495ED; font-size: 35px;">{text}</h>'
     st.markdown(new_title, unsafe_allow_html=True)
     
-    
+
+def display_sidebar(data: pd.DataFrame):
+    """
+    Displays the sidebar filters for the given data.
+
+    Args:
+        data (pd.DataFrame): The input data.
+
+    Returns:
+    """
+    st.sidebar.header("Filters")
+    columns_to_select = sorted(data['col1'].unique())
+    selected_columns = st.sidebar.multiselect(
+        "Selected Columns", columns_to_select, columns_to_select)
+    # can be added multiple selection suck as slides
+    return selected_columns
+
+
 def main():
     """
     Main function to pull and display data.
@@ -107,3 +124,6 @@ def main():
     sql_query = """SELECT COL1, COL2 FROM TABLE1; """
     data = load_data(sql_query)
     # TODO add filter data/display functions
+    
+    # write the title
+    st.title("Data Display")
