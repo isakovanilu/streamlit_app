@@ -123,7 +123,11 @@ def main():
     # suppose you have the query here
     sql_query = """SELECT COL1, COL2 FROM TABLE1; """
     data = load_data(sql_query)
-    # TODO add filter data/display functions
+    # TODO add display functions
+    selected_columns = display_sidebar(data)
+    # Filter data with the given columns
+    filtered_data = data.copy()
+    filtered_data = filter_data(filtered_data, 'selected_columns', selected_columns, range_data=None)
     
     # write the title
     st.title("Data Display")
