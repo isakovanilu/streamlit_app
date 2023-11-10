@@ -1,6 +1,7 @@
 
 
 import streamlit as st
+import pandas as pd
 
 def set_page_config():
     st.set_page_config(page_title="Streamlit App", page_icon=":bar_chart:", layout="wide", initial_sidebar_state="expanded")
