@@ -12,3 +12,9 @@ def main():
 
     controller = StreamlitController(SNOWFLAKE_CREDENTIALS)
     add_header("Welcome to the Streamlit App")
+
+    # suppose you have the query here
+    sql_query = """SELECT COL1, COL2 FROM TABLE1; """
+    data = controller.get_data(sql_query)
+
+
