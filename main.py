@@ -1,10 +1,13 @@
 
 import streamlit as st
+import os
 from controller import StreamlitController
 from view import set_page_config, display_sidebar, display_data_frame, add_header
 
 SNOWFLAKE_CREDENTIALS = {
-    # add your Snowflake credentials here
+    "user": os.getenv("SNOWFLAKE_USER"),
+    "password": os.getenv("SNOWFLAKE_PASSWORD"),
+    "account": os.getenv("SNOWFLAKE_ACCOUNT")
 }
 
 def main():
