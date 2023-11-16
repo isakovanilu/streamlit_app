@@ -1,10 +1,10 @@
-
-
 from snowflake.snowpark import Session
 import pandas as pd
+from typing import Optional, Dict, Any
+
 
 class SnowflakeModel:
-    def __init__(self, credentials):
+    def __init__(self, credentials: Dict[str, Any]):
         self.credentials = credentials
         self.session = self.create_session()
 
@@ -16,7 +16,7 @@ class SnowflakeModel:
             print(f"Error occurred while creating session: {e}")
             return None
 
-    def load_data(self, sql_query):
+    def load_data(self, sql_query: str) -> Optional[pd.DataFrame]:
         try:
             if self.session:
                 query = self.session.sql(sql_query).collect()
