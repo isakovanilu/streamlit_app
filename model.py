@@ -8,7 +8,7 @@ class SnowflakeModel:
         self.credentials = credentials
         self.session = self.create_session()
 
-    def create_session(self):
+    def create_session(self) -> Session:
         try:
             session = Session.builder.configs(self.credentials).create()
             return session
