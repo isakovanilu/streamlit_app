@@ -1,12 +1,13 @@
 
 from model import SnowflakeModel
 import pandas as pd
+from typing import List
 
 class StreamlitController:
-    def __init__(self, credentials):
+    def __init__(self, credentials) -> None:
         self.model = SnowflakeModel(credentials)
 
-    def get_data(self, query):
+    def get_data(self, query: str) -> pd.DataFrame:
         return self.model.load_data(query)
 
     def filter_data(self, data: pd.DataFrame, column: str, values: List[str], range_data: None) -> pd.DataFrame:
