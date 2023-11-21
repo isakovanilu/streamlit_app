@@ -10,27 +10,24 @@ SNOWFLAKE_CREDENTIALS = {
     "account": os.getenv("SNOWFLAKE_ACCOUNT")
 }
 
-def main():
+def main() -> None:
     set_page_config()
 
     controller = StreamlitController(SNOWFLAKE_CREDENTIALS)
     add_header("Welcome to the Streamlit App")
 
-    # suppose you have the query here
-    sql_query = """SELECT COL1, COL2 FROM TABLE1; """
-    data = controller.get_data(sql_query)
+    try:
+        sql_query = st.text_area("Enter your SQL query", """SELECT COL1, COL2 FROM TABLE1; """)
+        data = controller.get_data(sql_query)
 
-    if data is not None:
-        # display the sidebar and get the selected columns
-        selected_columns = display_sidebar(data)
-        
-        # filter data based on the sidebar selection
-        filtered_data = controller.filter_data(data, 'COL1', selected_columns)
-        
-        # display the filtered data
-        display_data_frame(filtered_data)
-    else:
-        st.error("Failed to load data.")
+        if data is not None:
+            selected_columns = display_sidebar(data)
+            filtered_data = controller.filter_data(data, 'COL1', selected_columns)
+            display_data_frame(filtered_data)
+        else:
+            st.error("No data returned from the query.")
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
 
 if __name__ == "__main__":
     main()
