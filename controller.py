@@ -1,19 +1,27 @@
-
 from model import SnowflakeModel
 import pandas as pd
-from typing import List
+from typing import List, Any
 
 class StreamlitController:
-    def __init__(self, credentials) -> None:
+    def __init__(self, credentials: Any) -> None:
         self.model = SnowflakeModel(credentials)
 
     def get_data(self, query: str) -> pd.DataFrame:
-        return self.model.load_data(query)
+        try:
+            return self.model.load_data(query)
+        except Exception as e:
+            # Log the exception (or handle it as required)
+            raise e
 
-    def filter_data(self, data: pd.DataFrame, column: str, values: List[str], range_data: None) -> pd.DataFrame:
-        if range_data and column in data.columns:
-            return data[data[column].between(*range_data, inclusive='both')]
-        elif values and column in data.columns:
+    def filter_data(self, data: pd.DataFrame, column: str, values: List[str] = None, 
+                    range_data: tuple = None, inclusive: bool = True) -> pd.DataFrame:
+        if column not in data.columns:
+            # Log warning or raise an error
+            return data
+        
+        if range_data:
+            return data[data[column].between(*range_data, inclusive='both' if inclusive else 'neither')]
+        elif values:
             return data[data[column].isin(values)]
         else:
             return data
