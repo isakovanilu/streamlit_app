@@ -11,7 +11,7 @@ SNOWFLAKE_CREDENTIALS = {
 
 
 def main() -> None:
-    """This fucntion runs the streamlit app"""
+    """This function runs the streamlit app"""
     set_page_config()
 
     controller = StreamlitController(SNOWFLAKE_CREDENTIALS)
