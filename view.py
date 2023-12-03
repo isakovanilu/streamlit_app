@@ -14,6 +14,7 @@ def set_page_config() -> None:
 
 
 def add_header(text) -> None:
+    """This function adds the header"""
     new_title = f'<h style="font-family:sans-serif; color:#6495ED; font-size: 35px;">{text}</h>'
     st.markdown(new_title, unsafe_allow_html=True)
 
