@@ -7,6 +7,7 @@ class StreamlitController:
         self.model = SnowflakeModel(credentials)
 
     def get_data(self, query: str) -> pd.DataFrame:
+        """This function pulls data from database with the given query"""
         try:
             return self.model.load_data(query)
         except Exception as e:
