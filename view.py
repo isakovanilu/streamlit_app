@@ -20,6 +20,7 @@ def add_header(text) -> None:
 
 
 def display_sidebar(data: pd.DataFrame) -> List[str]:
+    """ This function displays the sidebar"""
     st.sidebar.header("Filters")
     columns_to_select = sorted(data.columns)
     selected_columns = st.sidebar.multiselect(
@@ -28,6 +29,7 @@ def display_sidebar(data: pd.DataFrame) -> List[str]:
 
 
 def display_data_frame(data: pd.DataFrame) -> None:
+    """This function displays the dataframe"""
     st.title("Data Display")
     st.write("Filtered Data")
     st.dataframe(data)
