@@ -1,3 +1,4 @@
+"""This is view module"""
 
 from typing import List
 import streamlit as st
@@ -10,7 +11,8 @@ def set_page_config() -> None:
     st.set_page_config(page_title="Streamlit App", page_icon=":bar_chart:",
                        layout="wide", initial_sidebar_state="expanded")
     st.markdown(
-        "<style> footer {visibility: hidden;} </style>", unsafe_allow_html=True)
+        "<style> footer {visibility: hidden;} </style>",
+        unsafe_allow_html=True)
 
 
 def add_header(text) -> None:
