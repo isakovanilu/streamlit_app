@@ -29,8 +29,8 @@ def main() -> None:
             display_data_frame(filtered_data)
         else:
             st.error("No data returned from the query.")
-    except Exception as e:
-        st.error(f"An error occurred: {e}")
+    except Exception as exc:
+        raise ValueError(f"An error occurred: {exc}") from exc
 
 
 if __name__ == "__main__":

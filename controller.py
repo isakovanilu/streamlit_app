@@ -11,11 +11,8 @@ class StreamlitController:
 
     def get_data(self, query: str) -> pd.DataFrame:
         """This function pulls data from database with the given query"""
-        try:
-            return self.model.load_data(query)
-        except Exception as e:
-            # Log the exception (or handle it as required)
-            raise e
+        return self.model.load_data(query)
+
 
     def filter_data(
             self,

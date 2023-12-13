@@ -12,8 +12,8 @@ class SnowflakeModel:
         try:
             session = Session.builder.configs(self.credentials).create()
             return session
-        except:
-            raise ValueError(f"Error occurred while creating session")
+        except Exception as exc:
+            raise ValueError("Error occurred while creating session") from exc
 
     def load_data(self, sql_query: str) -> Optional[pd.DataFrame]:
         try:
@@ -21,5 +21,5 @@ class SnowflakeModel:
                 query = self.session.sql(sql_query).collect()
                 return pd.DataFrame(query)
             return None
-        except:
-            raise ValueError(f"Error occurred while loading data")
+        except Exception as exc:
+            raise ValueError("Error occurred while loading data") from exc
