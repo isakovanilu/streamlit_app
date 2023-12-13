@@ -1,6 +1,6 @@
+from typing import Optional, Dict, Any
 from snowflake.snowpark import Session
 import pandas as pd
-from typing import Optional, Dict, Any
 
 
 class SnowflakeModel:
@@ -12,17 +12,14 @@ class SnowflakeModel:
         try:
             session = Session.builder.configs(self.credentials).create()
             return session
-        except Exception as e:
-            print(f"Error occurred while creating session: {e}")
-            return None
+        except:
+            raise ValueError(f"Error occurred while creating session")
 
     def load_data(self, sql_query: str) -> Optional[pd.DataFrame]:
         try:
             if self.session:
                 query = self.session.sql(sql_query).collect()
                 return pd.DataFrame(query)
-            else:
-                return None
-        except Exception as e:
-            print(f"Error occurred while loading data: {e}")
             return None
+        except:
+            raise ValueError(f"Error occurred while loading data")
