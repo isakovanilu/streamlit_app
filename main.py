@@ -18,10 +18,6 @@ def main() -> None:
 
     sql_query = st.text_area("Enter your SQL query", DEFAULT_QUERY)
 
-    if not controller.is_valid_query(sql_query):
-        st.error("Invalid SQL query. Please modify and try again.")
-        return
-
     try:
         data = controller.get_data(sql_query)
         if data is not None:
